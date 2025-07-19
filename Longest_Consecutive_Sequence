@@ -1,0 +1,28 @@
+// hash map question
+
+
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        map<int,int> mpp;
+        if(nums.size() == 0) return 0;
+        for(auto it : nums) mpp[it]++;
+        int ans = 1;
+        int length = 1;
+        auto currele = mpp.begin();
+        for(auto it = std::next(mpp.begin()); it != mpp.end(); it++){
+            if(it -> first - currele -> first == 1){
+                length++;
+                currele = it;
+                ans = max(ans, length);
+            }
+            else{
+                 length = 1;
+                 currele = it;
+            }
+        }
+        return ans;
+        
+    }
+};
