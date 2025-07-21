@@ -1,0 +1,22 @@
+// USE BUCKET SORT
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int,int> mpp;
+        for(auto it : nums) mpp[it]++;
+        vector<vector<int>> buckets(nums.size() +1);
+        for(auto it = mpp.begin(); it != mpp.end(); it++){
+            buckets[it-> second].push_back(it-> first);
+
+        }
+        vector<int> ans;
+        for(int i = buckets.size() -1; i >= 0; i--){
+            for(int nums : buckets[i]){
+                if(ans.size() == k) break;
+                ans.push_back(nums);
+            }
+        }
+        return ans;
+    }
+};
