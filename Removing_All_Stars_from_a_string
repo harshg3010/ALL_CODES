@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string removeStars(string s) {
+
+        /// Two pointers approach
+       /// or stack can be used
+        
+        string ans = "";
+        int j = 0;
+        while(j < s.size()){
+            if(s[j] == '*'){
+                ans.pop_back();
+            }
+            else{
+                ans.push_back(s[j]);
+            }
+            j++;
+        }
+        return ans;
+    }
+};
