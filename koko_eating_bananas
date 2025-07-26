@@ -1,0 +1,36 @@
+// classical binary search approach
+// find Minimum amd Maximum values from the given array.
+// search in (Minimum amd Maximum values) search space.
+// return the minimum integer(rate of eating the banana).
+
+
+
+class Solution {
+public:
+
+int findtime(int rateofeating, vector<int>& piles, int tottime){
+    for(int i = 0; i< piles.size(); i++){
+        int time = ceil((double)piles[i]/rateofeating);
+        tottime += time;
+    }
+    return tottime;
+
+}
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int minspeed = 1;
+        int maxspeed = *max_element(piles.begin(), piles.end());
+        while(minspeed < maxspeed){
+            // wih the speed of eating mid bananas per hour
+            int rateofeating = (minspeed+maxspeed)/2;
+           int tottime = findtime(rateofeating, piles, 0);
+           if(tottime <= h){
+            maxspeed = rateofeating;
+           }
+           else{
+            minspeed = rateofeating +1;
+           }
+        }
+        return minspeed;
+        
+    }
+};
