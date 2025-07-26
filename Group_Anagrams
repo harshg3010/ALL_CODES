@@ -1,0 +1,23 @@
+//  sort the word in strs and make it as key in map
+
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        map<string,vector<string>> mpp;
+        vector<vector<string>> ans;
+        for(auto it : strs){
+            string s = it;
+            sort(it.begin(), it.end());
+                mpp[it].push_back(s);
+            
+        }
+
+        for(auto it = mpp.begin(); it != mpp.end(); it++){
+            ans.push_back(it -> second);
+
+        }
+        return ans;
+        
+    }
+};
