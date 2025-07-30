@@ -1,0 +1,25 @@
+// Classic queue implementation approach 
+// calculate deficiet for only one traversal of array.
+
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+
+ /// its based on queue approach 
+ 
+        int deficiet = 0;
+        int balance = 0;
+        int start = 0;
+        for(int i = 0; i< gas.size(); i++){
+            balance += gas[i] - cost[i];
+            if(balance <0){
+                deficiet += balance;
+                start = i+1;
+                balance = 0;
+            }
+        }
+        if(deficiet + balance >= 0) return start;
+        return -1;
+        
+    }
+};
