@@ -1,0 +1,26 @@
+// Here the array is kind of circular in nature.
+// You can search for next greater element in right as well as left direction.
+// The i%n gives always the current index
+// Run loop from 2*n-1 index such that the gets traversed two times.
+
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        //  we always push indexes in monotonic stack
+
+        int n = nums.size();
+        vector<int> ans(n, -1);
+        stack<int> st;
+
+        for(int i = 2*n- 1; i >= 0; i--){
+            while(!st.empty() && nums[st.top()] <= nums[i%n]){
+                st.pop();
+            }
+
+            if(st.empty()) ans[i%n] = -1;
+            else ans[i%n] = nums[st.top()];
+            st.push(i%n);
+        }
+        return ans;
+    }
+};
