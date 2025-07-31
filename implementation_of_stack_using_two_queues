@@ -1,0 +1,58 @@
+class MyStack {
+public:
+
+/// use two queues to implement stack
+
+queue<int> q1;
+queue<int> q2;
+
+    MyStack() {        
+    }
+    
+    void push(int x) {
+        // three operations
+        // 1. remove all elements from the queue1 and push in queue2
+        // 2. once empty push incoming element in q1
+        // 3. now remove all elements from the q2 and all in q1
+        while(!q1.empty()){
+            int ele = q1.front();
+            q1.pop();
+            q2.push(ele);
+        }
+        q1.push(x);
+
+        while(!q2.empty()){
+            int q2ele = q2.front();
+            q2.pop();
+            q1.push(q2ele);
+        }
+    }
+    
+    int pop() {
+        // pop element from the queue1(remove from the front the top element of stack)
+        int ele = q1.front();
+        q1.pop();
+        return ele;
+        
+    }
+    
+    int top() {
+          // always stack top element will be represented from q1 front
+        return q1.front();
+        
+    }
+    
+    bool empty() {
+        return q1.empty();
+        
+    }
+};
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack* obj = new MyStack();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->top();
+ * bool param_4 = obj->empty();
+ */
