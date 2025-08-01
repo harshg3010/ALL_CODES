@@ -1,0 +1,54 @@
+Three step solution
+
+1. calculate smaller value for arr[i] (same as previous smaller element)
+2. calculate right smaller value for arr[i] (bit different from next greater element)
+3. calculate the area for each heights[i] through area = heights[i] * width;
+4. width will be given as right smaller value for arr[i] - left smaller value for arr[i] - 1   -> (rarr[i] - larr[i] - 1);
+
+
+
+
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        stack<int> st;
+        int n = heights.size();
+        vector<int> larr(n,0);
+        vector<int> rarr(n,0);
+
+        // right smaller value -> next smaller value  O(n)
+
+        for(int i = n-1; i>=0; i--){
+            while(!st.empty() && heights[st.top()] >= heights[i]){
+                st.pop();
+            }
+            if(st.empty()) rarr[i] = n;
+            else rarr[i] = st.top();
+            st.push(i);
+        }
+
+        // remove all elements from stack
+
+        while(!st.empty()) st.pop();
+
+        // previous smaller element  O(n)
+
+        for(int i =0; i< n; i++){
+            while(!st.empty() && heights[st.top()] >= heights[i]){
+                st.pop();
+            }
+            if(st.empty()) larr[i] = -1;
+            else larr[i] = st.top();
+            st.push(i);
+        }
+
+        // O(n)
+        int ans=  0;
+        for(int i = 0; i< n; i++){ 
+            int width = rarr[i] - larr[i] -1;
+            int currarea = heights[i] * width;
+            ans =max(ans, currarea);
+        }
+        return ans;
+    }
+};
