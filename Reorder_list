@@ -1,0 +1,49 @@
+// stack based approach
+// push all elements of linked list in the stack
+// find middle point of the stack run loop through it 
+// change the pointers and update the linked list.
+// make sure to remove the last pointer to point to the null
+
+
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        if(head == NULL || head -> next == NULL) return;
+        stack<ListNode*> st;
+        ListNode* temp = head;
+        int len  = 0;
+
+        // count the length of the linked list
+
+        while(temp != NULL){
+            st.push(temp);
+            len++;
+            temp = temp -> next;
+        }
+
+        temp = head;
+        for(int i = 0; i< len/2; i++){
+            ListNode* top = st.top();
+            st.pop();
+
+            top -> next = temp -> next;
+            temp -> next = top;
+            temp = top -> next;
+        }
+
+        temp -> next = NULL;
+        
+    }
+};
