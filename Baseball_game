@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int calPoints(vector<string>& op) {
+        int n = op.size();
+        stack<int> st;
+        int ans=  0;
+        for(int i = 0; i< n; i++){
+            if(op[i] == "+"){
+                int ele1 = st.top();
+                st.pop();
+                int ele2 = st.top();
+                st.pop();
+                st.push(ele2);
+                st.push(ele1);
+                st.push(ele1 + ele2);
+
+            }
+            else if(op[i] == "D"){
+                int ele = st.top();
+                st.push(2 * ele);
+            }
+            else if(op[i] == "C") st.pop();
+            else{
+                int ele = stoi(op[i]);
+                st.push(ele);
+            }
+        }
+
+        while(!st.empty()){
+            int ele = st.top();
+            ans += ele;
+            st.pop();
+        }
+
+        return ans;
+        
+    }
+};
