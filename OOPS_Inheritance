@@ -1,0 +1,53 @@
+# include<bits/stdc++.h>
+using namespace std;
+
+
+class Student{
+    public:
+    
+     string name;
+     int rollno;
+     
+     Student(){
+         cout << "Firstly parent class constructor is called ... \n";
+     }
+     
+     ~Student(){
+         cout << "Secondly Parent class destructor always called after child class destructor..\n";
+     }
+    
+};
+
+class Student1 : public Student{
+    
+    // inheritance
+    public:
+     float cgpa;
+     
+     Student1(){
+         cout << "Secondly the child class constructor is called .. \n";
+     }
+     
+     void getInfo(){
+         cout << "name : " << name << endl;
+         cout << "roll no : " << rollno << endl;
+         cout << "cgpa : " << cgpa << endl;
+     }
+     
+     ~Student1(){
+         cout << "In the case of destructor Firstly child class static memory will get deleted.. \n"; 
+     }
+    
+};
+
+
+
+int main(){
+    Student1 s1;
+    s1.name = "HArsh";
+    s1.rollno = 200;
+    s1.cgpa = 8.182;
+    s1.getInfo();
+    
+    return 0;
+}
