@@ -1,0 +1,26 @@
+class Solution {
+public:
+    string resultingString(string s) {
+        stack<char> st;
+        string str ="";
+        int i = 0;
+        for(int i = 0; i< s.size(); i++){
+             if(st.empty()){
+                st.push(s[i]);
+            }
+            else if((st.top() == 'z' && s[i] == 'a') || (st.top() == 'a' && s[i] == 'z')) st.pop();
+            else if(!st.empty() && (s[i] - st.top() == 1 || st.top() - s[i] == 1)) st.pop();
+            else st.push(s[i]); 
+        }
+
+        while(!st.empty()){
+            char ch = st.top();
+            str += ch;
+            st.pop();
+        }
+        reverse(str.begin(), str.end());
+
+        return str;
+        
+    }
+};
