@@ -1,0 +1,111 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+/*
+
+1. General representation of list in c++
+
+list<data_type> name;    
+
+
+
+example -
+
+list<int> l;      [1,2,3,4,5,6] --> would store integers
+list<string> l;   ["hasrh", "goel", "is", "a", "good", "boy"]  --> would store string type data. 
+
+ 
+2. data type object  
+
+operations allowed -
+
+1. push_back() 
+2. push_front()
+3. pop_back()
+4. pop_front()
+5. size      -> list.size()
+
+
+example -
+
+[1,2,3]  
+
+push_back(4) --> [1,2,3,4]
+pop_front()  --> [2,3,4]
+
+
+3. how to allocate dyanmic array
+
+int* arr;
+arr = new int[]     
+
+1. int*  --> integer type data array with *(asterik represent dynamic size, can be reduce and increase).
+2. new  --> object called and made(memory allocated).
+3. int[] --> the data type int follows by [] for array
+
+
+for list --
+
+1. list is a like similar to doubly linked list
+2. l is nothing but an dynamic array(2D array) where each element is a list.
+
+
+1. list* <int> l;  --> datatype* for dynamic allocation(list<int>* ) (l - variable name)
+2. l = new list<int> []  --> the list created will be of type 
+ 
+3. l = [[1,2,3], [2,5,6], [5,6,7]];
+ 
+ where each l[i] == node 
+ ans        l[i][j] = represents the connection between different nodes.
+
+
+
+
+*/
+
+class Graph{
+public:
+    
+    int V; // number of the vertex in the graph
+    list<int> *l;   // dynamic array of data type list
+    
+    Graph(int V){
+        this-> V = V;
+        l = new list<int> [V]; 
+    }
+
+// Note -- addEdge function is for directionless edges only here.
+
+
+
+    void addEdge(int u, int v){
+        l[u].push_back(v);        // here the node u has a connection with node v so we push_back node v in list of neighbours for u node.
+        l[v].push_back(u);        // same for node v.
+    }
+    
+    void printAdjList(){
+        for(int i = 0; i< V; i++){
+            cout << i << " : ";
+            for(int neigh : l[i]){
+                cout << neigh << " ";
+            }
+            cout << endl;
+        }
+    }
+    
+    
+};
+
+int main(){
+    Graph g(5);    // 5 means we have 5 vertex in our Graph
+    
+    g.addEdge(0,1);
+    g.addEdge(1,2);
+    g.addEdge(1,3);
+    g.addEdge(2,3);
+    g.addEdge(2,4);
+    
+    g.printAdjList();
+
+    return 0;
+}
