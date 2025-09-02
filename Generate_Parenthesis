@@ -1,0 +1,22 @@
+class Solution {
+public:
+    
+     void solve(int cnt, string str, int open, int close, vector<string>& ans, int n){
+        if(open > n) return ;
+        if(open + close == 2*n && open == close){
+            ans.push_back(str);
+            return ;
+        }
+        solve(cnt +1, str + '(', open +1, close, ans, n);
+        if(open > close){
+            solve(cnt +1, str + ')', open, close +1, ans, n);
+        }
+     }
+
+    vector<string> generateParenthesis(int n) {
+        vector<string> ans;
+        string str ="";
+        solve(1, str, 0, 0, ans, n);
+        return ans;
+    }
+};
