@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        vector<pair<pair<int,int>, int>> arr;
+        vector<vector<int>> res;
+        for(int i = 0; i< points.size(); i++){
+            long long ans = points[i][0]*points[i][0] + points[i][1]*points[i][1];
+            arr.push_back({{points[i][0], points[i][1]}, ans});
+        }
+
+        sort(arr.begin(), arr.end(), [](auto &a, auto &b) {
+        return a.second < b.second;  
+    });
+    int i = 0;
+    while(k--){
+        
+        res.push_back({arr[i].first.first, arr[i].first.second});
+        i++;
+    }
+    return res;
+
+        
+    }
+};
