@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int longestBalanced(vector<int>& nums) {
+        if(nums.size() == 1) return 0;
+        int maxlen = 0;
+        for(int  i =0;i< nums.size(); i++){
+            int noofeven = 0;
+            int noofodd = 0;
+            unordered_map<int,int> mpp;
+            for(int j = i; j< nums.size(); j++){
+               if(nums[j]%2 == 0){
+                   if(mpp.find(nums[j]) == mpp.end()){
+                       noofeven++;
+                       mpp[nums[j]]++;
+                   }
+               }
+                else{
+                    if(mpp.find(nums[j]) == mpp.end()){
+                        noofodd++;
+                        mpp[nums[j]]++;
+                    }
+                }
+                if(noofeven == noofodd){
+                    maxlen = max(maxlen, j-i+1);
+                }
+            }
+        }
+
+        return maxlen;
+        
+    }
+};
