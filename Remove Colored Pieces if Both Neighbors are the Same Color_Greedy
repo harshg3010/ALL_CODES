@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool winnerOfGame(string s) {
+        int n = s.size();
+        int alice = 0; int bob = 0;
+        stack<char> st;
+        st.push(s[0]);
+
+        for(int i = 1; i < n-1; i++){
+            if(s[i] == 'A' && st.top() == 'A' && s[i+1] == 'A'){
+                alice++;
+            }
+            else if(s[i] == 'B' && st.top() == 'B' && s[i+1] == 'B'){
+                bob++;
+            }
+            st.push(s[i]);
+        }
+        if(alice <= bob) return false;
+        else return true;
+        return 0;
+
+    }
+};
