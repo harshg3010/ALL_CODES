@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int maxSumDistinctTriplet(vector<int>& x, vector<int>& y) {
+        int n = x.size();
+        int ans = 0;
+        unordered_map<int,int> mpp;
+        for(int i = 0; i< n; i++){
+            if(mpp.find(x[i]) != mpp.end()){
+                mpp[x[i]] = max(mpp[x[i]], y[i]);
+            }
+            else{
+                mpp[x[i]]  = y[i];
+            }
+        }
+        if(mpp.size() <=2) return -1;
+        vector<int> test;
+        for(auto [a, b] : mpp){
+            test.push_back(b);
+        }
+        if(test.size() < 3) return -1;
+        int testsize = test.size();
+        sort(test.begin(), test.end());
+       ans += test[testsize -1] + test[testsize -2] + test[testsize -3];
+
+        return ans;
+    }
+};
