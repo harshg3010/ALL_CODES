@@ -1,0 +1,37 @@
+class Solution {
+public: 
+ 
+  
+   
+    bool check(long long time, int n, vector<int>& batteries){
+        long long count = 0;
+        for(auto it : batteries){
+            count += min((long long)it, time);
+        }
+       return count >= time* n;
+    }
+    long long maxRunTime(int n, vector<int>& batteries) {
+
+        // binary search
+        long long low = 0;
+        long long high = 0;
+        for(int b : batteries){
+            high += b;
+        }
+
+        long long ans = 0;
+        while(low <= high){
+            long long mid = (low + high)/2;
+            if(check(mid, n, batteries)){
+                ans = mid;
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+        }
+
+        return ans;
+        
+    }
+};
