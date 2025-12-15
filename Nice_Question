@@ -1,0 +1,30 @@
+class Solution {
+public:
+    const int mod = 1000000007;
+    int numberOfWays(string corridor) {
+        int n = corridor.size();
+        int cnt = 0;
+        for(auto it : corridor){
+            if(it == 'S') cnt++;
+        }
+
+        if(cnt == 0 || cnt%2 != 0) return 0;
+        if(cnt == 2) return 1;
+        long long cntS = 0;
+        long long  ans = 1;
+        long long  cntP = 0;
+        for(char c : corridor){
+            if(c == 'S'){
+                cntS++;
+                if(cntS > 2 && cntS%2 ==1){
+                    ans = (ans * (cntP + 1)) % mod;
+                    cntP = 0;
+                }   
+            }
+            else{
+                    if(cntS >= 2 && cntS%2 == 0)  cntP++;
+                }
+        }
+        return ans;
+    }
+};
