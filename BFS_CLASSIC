@@ -1,0 +1,39 @@
+class Solution {
+  public:
+    vector<int> shortestPath(vector<vector<int>>& edges, int N,int M){
+      vector<int> ans;
+      vector<int> dis(N, 10000);
+      vector<int> adj[N];
+      for(int i = 0; i< M; i++){
+        int first = edges[i][0];
+        int second = edges[i][1];
+
+        adj[first].push_back(second);
+        adj[second].push_back(first);
+      }
+
+      queue<pair<int , int>> q;
+      q.push({0, 0});
+      dis[0] = 0;
+
+      while(!q.empty()){
+        int node = q.front().first;
+        int distance = q.front().second;
+        q.pop();
+        // ans.push_back(distance);
+        for(auto neighbors : adj[node]){
+          if(dis[neighbors] == 10000){
+            q.push({neighbors, distance+1});
+          }
+          dis[neighbors] = min(dis[neighbors], distance+1);
+        }
+      }
+
+      for(int i = 0; i< dis.size(); i++){
+        if(dis[i] == 10000) dis[i] = -1;
+      }
+
+      return dis;
+
+    }
+};
